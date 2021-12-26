@@ -1,6 +1,7 @@
 import * as admin from "firebase-admin";
 import { ApiEngine } from "./apiEngine";
 import EnvConfig from "../../configs/env.config";
+import { InitHandler } from "../../components/_init/init.handler";
 
 export class MyApp {
   static bootstrap(): MyApp {
@@ -10,6 +11,7 @@ export class MyApp {
   engine: ApiEngine = new ApiEngine();
   callbacks: MyAppCallback[] = [];
 
+  private mInitHandler: InitHandler = new InitHandler(this.engine);
   isAppReady = false;
 
   constructor() {
@@ -27,6 +29,8 @@ export class MyApp {
     admin.initializeApp();
     admin.firestore().settings({ ignoreUndefinedProperties: true });
     console.log("--- Firestore Db Initated ---");
+    this.mInitHandler = new InitHandler(this.engine);
+    this.mInitHandler.initialize();
 
 
   }

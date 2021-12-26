@@ -10,13 +10,7 @@ export class AuthCommon {
 
     static getRoleForVerificationType = (verficationType: string): number => {
 
+        return FirestoreConstant.User.ROLE.GUARD
 
-        if (verficationType === ConfigConstant.AUTH.verificationType.admin) {
-            return FirestoreConstant.User.ROLE.ADMIN
-        } else if (verficationType === ConfigConstant.AUTH.verificationType.manager) {
-            return FirestoreConstant.User.ROLE.MANAGER
-        } else {
-            return FirestoreConstant.User.ROLE.GUARD    
-        }
     };
 }

@@ -8,7 +8,6 @@ import { ApiEngine } from "../../apps/base/apiEngine";
 import { UserFind } from "../middleware/userFind";
 import { RoutesBase } from "./base/routes";
 import { ControllerAuth } from '../controllers/auth';
-import { ControllerInit } from '../controllers/_init';
 import { ControllerGuard } from '../controllers/guard';
 import { ControllerReport } from '../controllers/report';
 
@@ -27,10 +26,6 @@ export class RoutesApi extends RoutesBase {
   setupRoutesList(router: express.Router) {
 
     const userFind = new UserFind(this.app, this.engine);
-
-    let initC = new ControllerInit(this.app, this.engine);
-    router.post("/_init", initC.init);
-
 
     let auth = new ControllerAuth(this.app, this.engine);
     router.post("/auth/verify", auth.verifyController.verify);

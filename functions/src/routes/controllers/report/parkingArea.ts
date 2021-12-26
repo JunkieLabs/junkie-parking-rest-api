@@ -3,7 +3,6 @@ import * as admin from "firebase-admin";
 import { body, query, validationResult } from "express-validator";
 import * as _ from "lodash";
 import { ApiEngine } from "../../../apps/base/apiEngine";
-import { ReportCreator } from "../../../components/report/creator";
 import { FirestoreDbCheckInOut } from "../../../engines/firestore/interface/checkInOut";
 import { FirestoreConstant } from "../../../engines/firestore/constants.firestore";
 import { ModelReportParkingWheeler } from "./models";
@@ -16,7 +15,6 @@ export class ControllerParkingArea {
 
     // Db Model
     private mFsDbCheckInOut = new FirestoreDbCheckInOut();
-    private mReportCreator = new ReportCreator();
 
     getReport = async (
         req: Express.Request,
