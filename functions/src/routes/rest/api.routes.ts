@@ -5,11 +5,9 @@ import { ControllerParkingArea } from './../controllers/parkingArea/index';
 import { ControllerParkingAccount } from './../controllers/parkingAccount/index';
 import * as express from "express";
 import { ApiEngine } from "../../apps/base/apiEngine";
-import { ControllerTest } from "../controllers/test";
 import { UserFind } from "../middleware/userFind";
 import { RoutesBase } from "./base/routes";
 import { ControllerAuth } from '../controllers/auth';
-import { ControllerSubscription } from '../controllers/subscription';
 import { ControllerInit } from '../controllers/_init';
 import { ControllerGuard } from '../controllers/guard';
 import { ControllerReport } from '../controllers/report';
@@ -28,6 +26,7 @@ export class RoutesApi extends RoutesBase {
 
   setupRoutesList(router: express.Router) {
 
+    const userFind = new UserFind(this.app, this.engine);
 
     let initC = new ControllerInit(this.app, this.engine);
     router.post("/_init", initC.init);
@@ -39,35 +38,32 @@ export class RoutesApi extends RoutesBase {
 
     // //    Guard Route
     const guard = new ControllerGuard(this.app, this.engine)
-    router.get("/guard/:id", guard.getController.byId);
+    router.get("/guard/:id", userFind.findUser, guard.getController.byId);
 
     const parkingAccount = new ControllerParkingAccount(this.app, this.engine);
-    router.post("/parking-account", parkingAccount.addController.add);
+    router.post("/parking-account", userFind.findUser, parkingAccount.addController.add);
 
     const parkingArea = new ControllerParkingArea(this.app, this.engine);
-    router.post("/parking-area", parkingArea.addController.add);
-    router.get("/parking-area/:id", parkingArea.getController.byId);
-    router.put("/parking-area", parkingArea.updateController.update);
+    router.post("/parking-area", userFind.findUser, parkingArea.addController.add);
+    router.get("/parking-area/:id", userFind.findUser, parkingArea.getController.byId);
+    router.put("/parking-area", userFind.findUser, parkingArea.updateController.update);
 
     const vehicle = new ControllerVehicle(this.app, this.engine);
-    router.post("/vehicle", vehicle.addController.add);
-    router.put("/vehicle", vehicle.updateController.update);
+    router.post("/vehicle", userFind.findUser, vehicle.addController.add);
+    router.put("/vehicle", userFind.findUser, vehicle.updateController.update);
 
 
     const qrCode = new ControllerQrCode(this.app, this.engine);
-    router.post("/qrcodes/add-bulk", qrCode.addBulkController.addBulkQrCodes);
-    router.get("/qrcode/vehicle/:code", qrCode.getController.getVehicle);
+    router.post("/qrcodes/add-bulk", userFind.findUser, qrCode.addBulkController.addBulkQrCodes);
+    router.get("/qrcode/vehicle/:code", userFind.findUser, qrCode.getController.getVehicle);
 
-
-    const subscription = new ControllerSubscription(this.app, this.engine);
-    router.post("/subscription", subscription.addController.add);
 
     const checkInOut = new ControllerCheckInOut(this.app, this.engine);
-    router.post('/check-in-out', checkInOut.checkInOutPostController.create);
-    router.get('/check-in-outs', checkInOut.checkInOutGetController.getByQuery);
+    router.post('/check-in-out', userFind.findUser, checkInOut.checkInOutPostController.create);
+    router.get('/check-in-outs', userFind.findUser, checkInOut.checkInOutGetController.getByQuery);
 
     const report = new ControllerReport(this.app, this.engine);
-    router.get('/report/parking-area', report.parkingAreaController.getReport);
+    router.get('/report/parking-area', userFind.findUser, report.parkingAreaController.getReport);
 
 
   }

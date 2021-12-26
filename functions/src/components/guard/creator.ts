@@ -56,16 +56,7 @@ export class GuardCreator {
         ]);
         let dbObjectGuard = dbObjects[0];
 
-        fetch(
-            EnvConfig.apiUrl() + RouteConstant.Base.url.calc + RouteConstant.Calc.url.guardAssign('Ve3wwehVGSXlVbGRqUldoUVYwWg==')
-            , {
-                method: 'post',
-                body: JSON.stringify({
-                    guardId: dbObjectGuard.id
-                }),
-                headers: { 'Content-Type': 'application/json' },
-            }).then(res => res.json())
-
+       
         return dbObjectGuard;
     };
 }

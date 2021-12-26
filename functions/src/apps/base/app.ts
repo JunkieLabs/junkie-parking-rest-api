@@ -24,14 +24,6 @@ export class MyApp {
 
   attachEngine() {
     // console.info("engine base 1", moment().valueOf());
-    // let firebaseAdminFile = EnvConfig.firebaseAdmin();
-    // let serviceAccount = require("./../../../" + firebaseAdminFile);
-    // let firebaseDbUrl = EnvConfig.firebaseDb();
-    // admin.initializeApp({
-    //   credential: admin.credential.cert(serviceAccount),
-    //   databaseURL: firebaseDbUrl,
-    //   storageBucket: EnvConfig.firebaseStorageBucket(),
-    // });
     admin.initializeApp();
     admin.firestore().settings({ ignoreUndefinedProperties: true });
     console.log("--- Firestore Db Initated ---");
