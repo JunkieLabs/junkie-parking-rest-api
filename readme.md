@@ -1,6 +1,17 @@
+
+---
+
+![](public/banner.png)
+
+
+---
+
 # Serverless REST API build with Cloud Functions, Firestore, Express and TypeScript
 
 This is a simple API that manage billing of vehicles in parking area. 
+
+> For related project, see [Junkie Parking App](https://github.com/JunkieLabs/junkie-parking-android-app) 
+
 
 ## Requirements
 
@@ -12,21 +23,35 @@ You will need a Firebase project and firebase tools cli
 npm install -g firebase-tools
 ```
 
+<br>
+
 ## Getting Started
 
-You can follow the guide on [Medium](https://) or clone this repository.
 
-## Clone this repository
+### Clone this repository
 
 ```
 git clone https://github.com/JunkieLabs/junkie-parking-rest-api.git .
 ```
+<br>
 
-## Create Firebase Project
+### Create Firebase Project
 
-## Updating firebase project id
+- Log into [firebase](http://console.firebase.google.com/) and create a project.
 
-You need to change the firebase project name in *.firebaserc* file.
+> for more detail visit [Firebase Project setup](https://firebase.google.com/docs/android/setup)
+
+
+- After creation of project, get the project id, this will be needed in next step.
+
+![](public/project_id.png)
+
+
+<br>
+
+### Updating firebase project id in repository
+
+- You need to change the firebase project name in *.firebaserc* file.
 
 ```
 {
@@ -36,33 +61,47 @@ You need to change the firebase project name in *.firebaserc* file.
 }
 ```
 
-After that, you can log in to firebase in the terminal 
+- After that, you can log in to firebase in the terminal 
 
 ```
 firebase login
 ```
 
-## Serve function
+### install packages
 
-For the first time, you have deploy the hosting and functions together
+
+- Go inside functions folder and install npm packages using terminal
+```
+npm install 
+```
+
+
+
+
+### Serve function
+
+- Go inside the functions folder, and run serve command 
 
 ```
-npm run deploy
+npm run serve
 ```
+
+-  after this you will get a url which can be used in [Junkie Parking Android App](https://github.com/JunkieLabs/junkie-parking-android-app) project
+
+
+
+
+![](public/served.png)
+
 
 ## Deploy to firebase
 
-For the first time, you have deploy the hosting and functions together
+- For the first time, you have deploy the hosting and functions together
 
 ```
 npm run deploy
 ```
 
-After that, you just need to deploy functions only
-
-```
-firebase deploy --only functions
-```
 
 <br>
 
@@ -98,9 +137,3 @@ For any questions or suggestions send a mail to junkielabs.dev@gmail.com or chat
 # License
 
 [MIT License](/LICENSE).
-
-
-# TODO 
-
-- change project Id
-- change firestore ref

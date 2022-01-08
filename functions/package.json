@@ -4,6 +4,7 @@
     "lint": "eslint \"src/**/*\"",
     "build": "tsc",
     "watch": "tsc -w",
+    "deploy": "firebase deploy --only functions",
     "serve": "npm run build && firebase serve --only functions -o 0.0.0.0",
     "logs": "firebase functions:log"
   },
