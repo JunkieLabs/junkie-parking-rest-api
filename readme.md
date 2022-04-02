@@ -46,6 +46,16 @@ git clone https://github.com/JunkieLabs/junkie-parking-rest-api.git .
 
 ![](public/project_id.png)
 
+<br>
+
+- Enable google auth, this will be needed for authorizing [Junkie Parking App](https://github.com/JunkieLabs/junkie-parking-android-app).
+
+![](public/auth-enable.png)
+
+
+<br>
+
+- ***make sure your firebase project is in blaze.***
 
 <br>
 
